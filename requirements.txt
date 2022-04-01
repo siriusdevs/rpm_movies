@@ -1,0 +1,7 @@
+Django==4.0.2               
+django-debug-toolbar==3.2.4               
+django-split-settings==1.1.0  
+Faker==13.3.0  
+pytest==6.2.5    
+pytest-cov==3.0.0
+
