@@ -4,4 +4,5 @@ django-split-settings==1.1.0
 Faker==13.3.0  
 pytest==6.2.5    
 pytest-cov==3.0.0
-
+bandit==1.7.2
+djangorestframework==3.13.1
