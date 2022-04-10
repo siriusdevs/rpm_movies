@@ -1,0 +1,16 @@
+
+{% block content %}
+<h1>RPM_MOVIES Home</h1>
+
+  <p>Welcome to <em>RPM_MOVIES</em>, a very basic Django website developed as a tutorial example of an online theatre</p>
+
+<h2>Dynamic content</h2>
+
+  <p>Our library has the following record counts:</p>
+  <ul>
+    <li><strong>Filmworks:</strong> {{ film_works }}</li>
+    <li><strong>Genres:</strong> {{ genres }}</li>
+    <li><strong>Persons:</strong> {{ persons }}</li>
+  </ul>
+
+{% endblock %}

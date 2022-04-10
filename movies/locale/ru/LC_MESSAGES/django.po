@@ -81,12 +81,12 @@ msgstr "фильмы/жанры"
 
 #: movies/models.py:85
 msgid "role"
-msgstr ""
+msgstr "роль"
 
 #: movies/models.py:92
 msgid "filmwork/person"
-msgstr ""
+msgstr "фильм/человек"
 
 #: movies/models.py:93
 msgid "filmworks/persons"
-msgstr ""
+msgstr "фильмы/люди"
