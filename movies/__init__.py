@@ -1,0 +1,1 @@
+"""Movies django app."""

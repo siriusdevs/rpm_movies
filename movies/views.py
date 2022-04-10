@@ -4,10 +4,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
-from .serializers import PersonSerializer, GenreSerializer, FilmworkSerializer, GenreFilmworkSerializer, PersonFilmworkSerializer
+import movies.serializers
+
 
 def custom_main(req):
-    """Renders request to custom index.html page."""
+    """Renders request (req) to custom index.html page.
+
+    Args:
+        req : http request.
+    """
     film_works = Filmwork.objects.all().count()
     persons = Person.objects.all().count()
     genres = Genre.objects.all().count()
@@ -15,40 +20,70 @@ def custom_main(req):
     return render(
         req,
         'index.html',
-        context={'film_works':film_works,
-                'persons':persons,
-                'genres':genres},
+        context={'film_works': film_works,
+                 'persons': persons,
+                 'genres': genres
+                 },
     )
 
+
 def main_page(req):
-    """Just renders main.html page."""
+    """Just renders main.html page.
+
+    Args:
+        req : http request.
+    """
     return render(req, 'main.html')
 
+
 def render_dummy(req):
-    """Returns simple http response."""
+    """Returns simple http response.
+
+    Args:
+        req : http request.
+    """
     return HttpResponse("<h1>This is the home page</h1>")
 
+
 def redirection_page(req):
-    """Redirects you elsewhere."""
+    """Redirects you elsewhere.
+
+    Args:
+        req : http request.
+    """
     return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
 
 
 class FilmworkViewSet(viewsets.ModelViewSet):
+    """A view for FilmworkModel, all objects ordered."""
+
     queryset = Filmwork.objects.all().order_by('title')
-    serializer_class = FilmworkSerializer    
+    serializer_class = movies.serializers.FilmworkSerializer
+
 
 class PersonViewSet(viewsets.ModelViewSet):
+    """A view for PersonModel, all objects ordered."""
+
     queryset = Person.objects.all().order_by('full_name')
-    serializer_class = PersonSerializer  
+    serializer_class = movies.serializers.PersonSerializer
+
 
 class GenreViewSet(viewsets.ModelViewSet):
+    """A view for GenreModel, all objects ordered."""
+
     queryset = Genre.objects.all().order_by('name')
-    serializer_class = GenreSerializer  
+    serializer_class = movies.serializers.GenreSerializer
+
 
 class GenreFilmworkViewSet(viewsets.ModelViewSet):
+    """A view for GenreFilmworkModel, all objects ordered."""
+
     queryset = GenreFilmwork.objects.all().order_by('genre')
-    serializer_class = GenreFilmworkSerializer  
+    serializer_class = movies.serializers.GenreFilmworkSerializer
+
 
 class PersonFilmworkViewSet(viewsets.ModelViewSet):
+    """A view for PersonFilmworkModel, all objects ordered."""
+
     queryset = PersonFilmwork.objects.all().order_by('person')
-    serializer_class = PersonFilmworkSerializer  
+    serializer_class = movies.serializers.PersonFilmworkSerializer

@@ -1,3 +1,4 @@
+"""Urls for movies app, used in settings/urls."""
 from django.urls import include, path
 from rest_framework import routers
 from . import views

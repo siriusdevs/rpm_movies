@@ -82,6 +82,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+DEFAULT_PORT = 5432
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,7 +91,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
-        'PORT': os.environ.get('DB_PORT', 5432),
+        'PORT': os.environ.get('DB_PORT', DEFAULT_PORT),
         'OPTIONS': {'options': '-c search_path=public,content'}
     }
 }

@@ -15,11 +15,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, re_path, include
-from movies import views
+from django.urls import path, include
+# from movies import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #re_path(r'^$', views.custom_main, name='main')
+    # re_path(r'^$', views.custom_main, name='main')
     path('', include('movies.urls'))
 ]
