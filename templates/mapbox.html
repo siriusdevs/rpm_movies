@@ -10,10 +10,11 @@
    <div id='map' width="100%" style='height:400px'></div>
    <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2lyaXVzZGV2cyIsImEiOiJjbDF3YmJ6ZnMwM3Z4M29ta2tjdmNnZHBiIn0.5_AfG0yijkZHd6heg33ChQ';
+   // mapboxgl.accessToken = {{ mapbox_access_token }}
     var map = new mapboxgl.Map({
      container: 'map',
-     style: 'mapbox://styles/mapbox/streets-v11',
-     //style: 'mapbox://styles/siriusdevs/cl1wqm7sc004b15o9v1ze78g2',
+     // style: 'mapbox://styles/mapbox/streets-v11',
+     style: 'mapbox://styles/siriusdevs/cl1wqm7sc004b15o9v1ze78g2',
      center: [39.9801027,43.403336],
      zoom: 12,
      bearing: 180

@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import movies.serializers
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def custom_main(req):
@@ -35,6 +38,7 @@ def main_page(req):
     """
     return render(req, 'main.html')
 
+
 def google_map(req):
     """Shows page with Google Map.
 
@@ -43,15 +47,16 @@ def google_map(req):
     """
     return render(req, 'map.html')
 
+
 def mapbox_map(request):
     """Shows page with MapBox.
 
     Args:
-        req : http request.
+        request : http request.
     """
-    mapbox_access_token = 'pk.eyJ1Ijoic2lyaXVzZGV2cyIsImEiOiJjbDF3YmJ6ZnMwM3Z4M29ta2tjdmNnZHBiIn0.5_AfG0yijkZHd6heg33ChQ'
-    return render(request, 'mapbox.html', 
-                  { 'mapbox_access_token': mapbox_access_token })
+    mapbox_access_token = os.environ.get('MAPBOX_TOKEN')
+    return render(request, 'mapbox.html', {'mapbox_access_token': mapbox_access_token})
+
 
 def render_dummy(req):
     """Returns simple http response.
