@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import movies.serializers
 import os
+# from django.contrib.auth.mixins import LoginRequiredMixin
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -109,3 +110,15 @@ class PersonFilmworkViewSet(viewsets.ModelViewSet):
 
     queryset = PersonFilmwork.objects.all().order_by('person')
     serializer_class = movies.serializers.PersonFilmworkSerializer
+
+# class MoviesByUserListView(LoginRequiredMixin, generic.ListView):
+#     """
+#     Generic class-based view listing books on loan to current user.
+#     """
+#     model = MovieInstance
+#     template_name ='moviesinstance_list_by_user.html'
+#     paginate_by = 10
+
+#     def get_queryset(self):
+#         return MovieInstance.objects.filter(borrower=self.request.user).
+#               filter(status__exact='o').order_by('due_back')

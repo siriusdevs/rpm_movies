@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # re_path(r'^$', views.google_map, name='main')
     re_path('map/', views.mapbox_map, name='main'),
-    path('', include('movies.urls'))
+    path('', include('movies.urls')),
 ]
