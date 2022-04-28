@@ -11,8 +11,10 @@ router.register(r'GenreFilmwork', views.GenreFilmworkViewSet)
 router.register(r'PersonFilmwork', views.PersonFilmworkViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('rest/', include(router.urls)),
+    path('homepage/', views.custom_main, name='homepage'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('django.contrib.auth.urls')),
-    # re_path('movies/', views.MoviesByUserListView.as_view(), name='movies')
+    path('movies/', views.FilmworkListView.as_view(), name='movies'),
+    path('genres/', views.GenreListView.as_view(), name='genres')
 ]

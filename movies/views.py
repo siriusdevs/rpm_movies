@@ -6,11 +6,14 @@ from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import movies.serializers
 import os
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.views import generic
 from dotenv import load_dotenv
 load_dotenv()
 
 
+@login_required
 def custom_main(req):
     """Renders request (req) to custom index.html page.
 
@@ -111,14 +114,48 @@ class PersonFilmworkViewSet(viewsets.ModelViewSet):
     queryset = PersonFilmwork.objects.all().order_by('person')
     serializer_class = movies.serializers.PersonFilmworkSerializer
 
-# class MoviesByUserListView(LoginRequiredMixin, generic.ListView):
-#     """
-#     Generic class-based view listing books on loan to current user.
-#     """
-#     model = MovieInstance
-#     template_name ='moviesinstance_list_by_user.html'
-#     paginate_by = 10
 
-#     def get_queryset(self):
-#         return MovieInstance.objects.filter(borrower=self.request.user).
-#               filter(status__exact='o').order_by('due_back')
+class FilmworkListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing movies."""
+
+    model = Filmwork
+    template_name = 'catalog/movies_page.html'
+    paginate_by = 10
+    context_object_name = 'movies'
+
+    def get_queryset(self):
+        """Gets all films."""
+        return Filmwork.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Passes contest to generic html.
+
+        Args:
+            **kwargs: what context we ought to get.
+        """
+        context = super().get_context_data(**kwargs)
+        context['movies_list'] = self.get_queryset()
+        return context
+
+
+class GenreListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing genres."""
+
+    model = Genre
+    template_name = 'catalog/genres_page.html'
+    paginate_by = 10
+    context_object_name = 'genres'
+
+    def get_queryset(self):
+        """Gets all genres."""
+        return Genre.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Passes contest to generic html.
+
+        Args:
+            **kwargs: context that we ought to get.
+        """
+        context = super().get_context_data(**kwargs)
+        context['genres_list'] = self.get_queryset()
+        return context
