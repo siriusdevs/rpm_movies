@@ -159,3 +159,43 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         context['genres_list'] = self.get_queryset()
         return context
+
+
+class PersonListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing genres."""
+
+    model = Person
+    template_name = 'catalog/persons_page.html'
+    paginate_by = 10
+    context_object_name = 'persons'
+
+    def get_queryset(self):
+        """Gets all persons."""
+        return Person.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Passes context to generic html.
+
+        Args:
+            **kwargs: context that we ought to get.
+        """
+        context = super().get_context_data(**kwargs)
+        context['persons_list'] = self.get_queryset()
+        return context
+
+
+@login_required
+def genre(req):
+    """Renders request (req) to custom genre.html page.
+
+    Args:
+        req : http request.
+    """
+    genre_id = req.GET.get('id', '')
+    found_genre = Genre.objects.get(id=genre_id)
+
+    return render(
+        req,
+        'catalog/genre.html',
+        context={'genre': found_genre},
+    )

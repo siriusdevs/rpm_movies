@@ -16,5 +16,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('movies/', views.FilmworkListView.as_view(), name='movies'),
-    path('genres/', views.GenreListView.as_view(), name='genres')
+    path('genres/', views.GenreListView.as_view(), name='genres'),
+    path('persons/', views.PersonListView.as_view(), name='persons'),
+    path('genre/', views.genre, name='genre'),
 ]

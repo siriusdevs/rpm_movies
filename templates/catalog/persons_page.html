@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Persons</h1>
+
+    {% if persons_list %}
+    <ul>
+
+      {% for person in persons_list %}
+      <li>
+        <a>{{ person.full_name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no persons for now..</p>
+    {% endif %}
+{% endblock %}
