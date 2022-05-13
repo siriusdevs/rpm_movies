@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from dotenv import load_dotenv
+from django.conf import settings
 load_dotenv()
 
 
@@ -227,9 +228,9 @@ def movie(req):
     """
     movie_id = req.GET.get('id', '')
     found_movie = Filmwork.objects.get(id=movie_id)
-
+    url = found_movie.path
     return render(
         req,
         'entities/movie.html',
-        context={'movie': found_movie},
+        context={'movie': found_movie, 'url': settings.MEDIA_ROOT + url},
     )

@@ -12,7 +12,10 @@
       <li>  <a>Creation date: {{ movie.creation_date }}</a> </li>
       <li>  <a>Path: {{ movie.path }}</a> </li>
     </ul>
-
+    <video width="800" controls>
+      <source src="{{ url }}" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
     {% else %}
       <p>Movie not found..</p>
     {% endif %}
