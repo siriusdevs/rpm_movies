@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 12:12+0000\n"
+"POT-Creation-Date: 2022-05-13 06:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,74 +17,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: movies/models.py:22
+
+#: movies/models.py:33
 msgid "name"
 msgstr ""
 
-#: movies/models.py:23 movies/models.py:53
+#: movies/models.py:34 movies/models.py:72
 msgid "description"
 msgstr ""
 
-#: movies/models.py:30
+#: movies/models.py:42
 msgid "genre"
 msgstr ""
 
-#: movies/models.py:31
+#: movies/models.py:43
 msgid "genres"
 msgstr ""
 
-#: movies/models.py:36
+#: movies/models.py:49
 msgid "full_name"
 msgstr ""
 
-#: movies/models.py:43
+#: movies/models.py:57
 msgid "person"
 msgstr ""
 
-#: movies/models.py:44
+#: movies/models.py:58
 msgid "persons"
 msgstr ""
 
-#: movies/models.py:52
+#: movies/models.py:71
 msgid "title"
 msgstr ""
 
-#: movies/models.py:54
+#: movies/models.py:73
 msgid "rating"
 msgstr ""
 
-#: movies/models.py:57
+#: movies/models.py:75
 msgid "type"
 msgstr ""
 
-#: movies/models.py:58
-msgid "creation_date"
-msgstr ""
-
-#: movies/models.py:66
-msgid "filmwork"
-msgstr ""
-
-#: movies/models.py:67
-msgid "filmworks"
+#: movies/models.py:76
+msgid "path"
 msgstr ""
 
 #: movies/models.py:77
+msgid "creation_date"
+msgstr ""
+
+#: movies/models.py:86
+msgid "filmwork"
+msgstr ""
+
+#: movies/models.py:87
+msgid "filmworks"
+msgstr ""
+
+#: movies/models.py:99
 msgid "filmwork/genre"
 msgstr ""
 
-#: movies/models.py:78
+#: movies/models.py:100
 msgid "filmworks/genres"
 msgstr ""
 
-#: movies/models.py:85
+#: movies/models.py:109
 msgid "role"
 msgstr ""
 
-#: movies/models.py:92
+#: movies/models.py:117
 msgid "filmwork/person"
 msgstr ""
 
-#: movies/models.py:93
+#: movies/models.py:118
 msgid "filmworks/persons"
 msgstr ""

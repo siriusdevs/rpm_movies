@@ -8,7 +8,7 @@
 
       {% for movie in movies_list %}
       <li>
-        <a>{{ movie.title }}</a> ({{movie.rating}})
+        <a href="{% url 'movie'%}?id={{movie.id}}">{{ movie.title }}</a> ({{movie.rating}})
       </li>
       {% endfor %}
     </ul>

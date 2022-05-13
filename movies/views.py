@@ -196,6 +196,40 @@ def genre(req):
 
     return render(
         req,
-        'catalog/genre.html',
+        'entities/genre.html',
         context={'genre': found_genre},
+    )
+
+
+@login_required
+def person(req):
+    """Renders request (req) to custom person.html page.
+
+    Args:
+        req : http request.
+    """
+    person_id = req.GET.get('id', '')
+    found_person = Person.objects.get(id=person_id)
+
+    return render(
+        req,
+        'entities/person.html',
+        context={'person': found_person},
+    )
+
+
+@login_required
+def movie(req):
+    """Renders request (req) to custom movie.html page.
+
+    Args:
+        req : http request.
+    """
+    movie_id = req.GET.get('id', '')
+    found_movie = Filmwork.objects.get(id=movie_id)
+
+    return render(
+        req,
+        'entities/movie.html',
+        context={'movie': found_movie},
     )

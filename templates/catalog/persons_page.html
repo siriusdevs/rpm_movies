@@ -8,7 +8,7 @@
 
       {% for person in persons_list %}
       <li>
-        <a>{{ person.full_name }}</a>
+        <a href="{% url 'person'%}?id={{person.id}}">{{ person.full_name }}</a>
       </li>
       {% endfor %}
     </ul>

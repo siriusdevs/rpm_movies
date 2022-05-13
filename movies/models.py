@@ -73,6 +73,7 @@ class Filmwork(UUIDMixin):
     rating = models.FloatField(_('rating'), blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     type = models.CharField(_('type'), choices=TypeChoices.choices, max_length=MAX_LENGTH)
+    path = models.CharField(_('path'), max_length=MAX_LENGTH)
     creation_date = models.DateField(_('creation_date'))
     created = models.DateTimeField(auto_now_add=True)
 
@@ -93,6 +94,10 @@ class GenreFilmwork(UUIDMixin):
     genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        """String representation - filmwork genre."""
+        return ' '.join([str(self.film_work), str(self.genre)])
+
     class Meta:
         db_table = "content\".\"genre_film_work"
         verbose_name = _('filmwork/genre')
@@ -108,8 +113,8 @@ class PersonFilmwork(UUIDMixin):
     role = models.TextField(_('role'), blank=True)
 
     def __str__(self):
-        """String representation - role."""
-        return self.role
+        """String representation - actor's role in filmwork."""
+        return ' / '.join([str(self.film_work), self.role, str(self.person)])
 
     class Meta:
         db_table = "content\".\"person_film_work"

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Filmwork page</h1>
+
+    {% if movie %}
+    <ul>
+      <li> <a>Title: {{ movie.title }}</a> </li>
+      <li>  <a>Description: {{ movie.description }}</a> </li>
+      <li>  <a>Rating: {{ movie.rating }}</a> </li>
+      <li>  <a>Type: {{ movie.type }}</a> </li>
+      <li>  <a>Creation date: {{ movie.creation_date }}</a> </li>
+      <li>  <a>Path: {{ movie.path }}</a> </li>
+    </ul>
+
+    {% else %}
+      <p>Movie not found..</p>
+    {% endif %}
+{% endblock %}

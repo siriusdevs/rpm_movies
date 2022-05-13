@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Person page</h1>
+
+    {% if person %}
+    <ul>
+
+      <li>
+        <a>{{ person.full_name }}</a> 
+      </li>
+    </ul>
+
+    {% else %}
+      <p>Person not found..</p>
+    {% endif %}
+{% endblock %}

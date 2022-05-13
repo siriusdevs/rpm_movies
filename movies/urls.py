@@ -19,4 +19,6 @@ urlpatterns = [
     path('genres/', views.GenreListView.as_view(), name='genres'),
     path('persons/', views.PersonListView.as_view(), name='persons'),
     path('genre/', views.genre, name='genre'),
+    path('person/', views.person, name='person'),
+    path('movie/', views.movie, name='movie'),
 ]
