@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import movies.serializers
 import os
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import generic
@@ -126,7 +127,18 @@ class FilmworkListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         """Gets all films."""
-        return Filmwork.objects.all()
+        filmworks = Filmwork.objects.all()
+        paginator = Paginator(filmworks, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            page_filmworks = paginator.page(page)
+        except PageNotAnInteger:
+            page_filmworks = paginator.page(1)
+        except EmptyPage:
+            page_filmworks = paginator.page(paginator.num_pages)
+        # return filmworks.filter(id__in=[object.id for object in page_filmworks])
+        return page_filmworks
 
     def get_context_data(self, **kwargs):
         """Passes contest to generic html.
@@ -172,6 +184,18 @@ class PersonListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         """Gets all persons."""
+        # persons = Person.objects.all()
+        # paginator = Paginator(persons, self.paginate_by)
+        # page = self.request.GET.get('page')
+
+        # try:
+        #     page_persons = paginator.page(page)
+        # except PageNotAnInteger:
+        #     page_persons = paginator.page(1)
+        # except EmptyPage:
+        #     page_persons = paginator.page(paginator.num_pages)
+        # #page_query = persons.filter(id__in=[object.id for object in page_persons])
+        # return page_persons
         return Person.objects.all()
 
     def get_context_data(self, **kwargs):
@@ -229,6 +253,7 @@ def movie(req):
     movie_id = req.GET.get('id', '')
     found_movie = Filmwork.objects.get(id=movie_id)
     url = found_movie.path
+
     return render(
         req,
         'entities/movie.html',
