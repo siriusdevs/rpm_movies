@@ -6,13 +6,15 @@ from rest_framework import viewsets
 from .models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import movies.serializers
 import os
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from dotenv import load_dotenv
 from django.conf import settings
 load_dotenv()
+
+OBJECTS_PER_PAGE = 10
 
 
 @login_required
@@ -122,23 +124,8 @@ class FilmworkListView(LoginRequiredMixin, generic.ListView):
 
     model = Filmwork
     template_name = 'catalog/movies_page.html'
-    paginate_by = 10
+    paginate_by = OBJECTS_PER_PAGE
     context_object_name = 'movies'
-
-    def get_queryset(self):
-        """Gets all films."""
-        filmworks = Filmwork.objects.all()
-        paginator = Paginator(filmworks, self.paginate_by)
-        page = self.request.GET.get('page')
-
-        try:
-            page_filmworks = paginator.page(page)
-        except PageNotAnInteger:
-            page_filmworks = paginator.page(1)
-        except EmptyPage:
-            page_filmworks = paginator.page(paginator.num_pages)
-        # return filmworks.filter(id__in=[object.id for object in page_filmworks])
-        return page_filmworks
 
     def get_context_data(self, **kwargs):
         """Passes contest to generic html.
@@ -147,7 +134,11 @@ class FilmworkListView(LoginRequiredMixin, generic.ListView):
             **kwargs: what context we ought to get.
         """
         context = super().get_context_data(**kwargs)
-        context['movies_list'] = self.get_queryset()
+        filmworks = Filmwork.objects.all()
+        paginator = Paginator(filmworks, OBJECTS_PER_PAGE)
+        page_num = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_num)
+        context['movies_list'] = page_obj
         return context
 
 
@@ -156,12 +147,8 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
 
     model = Genre
     template_name = 'catalog/genres_page.html'
-    paginate_by = 10
+    paginate_by = OBJECTS_PER_PAGE
     context_object_name = 'genres'
-
-    def get_queryset(self):
-        """Gets all genres."""
-        return Genre.objects.all()
 
     def get_context_data(self, **kwargs):
         """Passes contest to generic html.
@@ -170,7 +157,11 @@ class GenreListView(LoginRequiredMixin, generic.ListView):
             **kwargs: context that we ought to get.
         """
         context = super().get_context_data(**kwargs)
-        context['genres_list'] = self.get_queryset()
+        genres = Genre.objects.all()
+        paginator = Paginator(genres, OBJECTS_PER_PAGE)
+        page_num = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_num)
+        context['genres_list'] = page_obj
         return context
 
 
@@ -179,24 +170,8 @@ class PersonListView(LoginRequiredMixin, generic.ListView):
 
     model = Person
     template_name = 'catalog/persons_page.html'
-    paginate_by = 10
+    paginate_by = OBJECTS_PER_PAGE
     context_object_name = 'persons'
-
-    def get_queryset(self):
-        """Gets all persons."""
-        # persons = Person.objects.all()
-        # paginator = Paginator(persons, self.paginate_by)
-        # page = self.request.GET.get('page')
-
-        # try:
-        #     page_persons = paginator.page(page)
-        # except PageNotAnInteger:
-        #     page_persons = paginator.page(1)
-        # except EmptyPage:
-        #     page_persons = paginator.page(paginator.num_pages)
-        # #page_query = persons.filter(id__in=[object.id for object in page_persons])
-        # return page_persons
-        return Person.objects.all()
 
     def get_context_data(self, **kwargs):
         """Passes context to generic html.
@@ -205,7 +180,11 @@ class PersonListView(LoginRequiredMixin, generic.ListView):
             **kwargs: context that we ought to get.
         """
         context = super().get_context_data(**kwargs)
-        context['persons_list'] = self.get_queryset()
+        persons = Person.objects.all()
+        paginator = Paginator(persons, OBJECTS_PER_PAGE)
+        page_num = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_num)
+        context['persons_list'] = page_obj
         return context
 
 
